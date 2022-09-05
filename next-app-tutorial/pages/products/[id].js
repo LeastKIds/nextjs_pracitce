@@ -1,6 +1,7 @@
 import {useRouter} from "next/router";
 import styles from "../../styles/Home.module.css";
 import Link from "next/link";
+import axios from "axios"
 
 // SSGの場合
 // export async function getStaticProps( {params} ) {
@@ -32,18 +33,17 @@ import Link from "next/link";
 //     }
 // }
 
-export async function getServerSideProps( {params} ) {
-    const req = await fetch(`http://localhost:3000/${params.id}.json`)
-    const data = await req.json()
+export async function getServerSideProps() {
+    const foodsData = await axios.get("http://localhost:1337/api/foods").data.data
 
     return {
         props: {
-            product: data
+            foods: foodsData
         }
     }
 }
 
-const Product = ( { product } ) => {
+const Product = ( { foods } ) => {
 
     const router = useRouter()
     const { id } = router.query
