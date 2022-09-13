@@ -16,6 +16,16 @@ const PORT = 3002
 io.on("connection", (socket) => {
     console.log("クライアントと接続しました！")
 
+    // クライアントから受信
+    socket.on("send_message", (data) => {
+        console.log(data)
+
+        // クライアントへ送信
+        io.emit("received_message", data)
+    })
+
+
+
     socket.on("disconnection", () => {
         console.log("クライアントと接続がきれました！")
     })
