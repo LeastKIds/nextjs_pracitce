@@ -16,7 +16,7 @@ export default function Home() {
             }else {
                 document.documentElement.removeAttribute("data-theme")
                 window.localStorage.setItem("theme", "light")
-            } 
+            }
         }
     }, [darkTheme])
 
